@@ -1,5 +1,10 @@
 
 public class LateMachine implements ILateMachine {
+    public int coffeeVolume = 250;
+    public int milkVolume = 50;
+    public static int maxWaterVolume = 1500;
+    protected int currentVolume;
+
     @Override
     public void steamMilk() {
         System.out.println("steam milk");
@@ -8,6 +13,7 @@ public class LateMachine implements ILateMachine {
     @Override
     public void fillWater() {
         System.out.println("fill water");
+        currentVolume = maxWaterVolume;
     }
 
     @Override
@@ -30,10 +36,16 @@ public class LateMachine implements ILateMachine {
         boilingWater();
         millBeans();
         mixingComponents();
+        steamMilk();
 
-        Coffee c = new Coffee(250);
+        if (currentVolume - coffeeVolume < 0) {
+            System.out.println("Error: no water!");
+            return null;
+        }
 
-        c.fillMilk(50);
+        Coffee c = new Coffee(coffeeVolume);
+
+        c.fillMilk(milkVolume);
 
         return c;
     }

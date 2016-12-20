@@ -1,6 +1,8 @@
 
 public class BaseMachine implements ICoffeMachine {
 
+    protected int currentVolume;
+
     @Override
     public void fillWater() {
 

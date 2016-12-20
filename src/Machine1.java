@@ -1,8 +1,14 @@
 
 public class Machine1 extends BaseMachine {
+
+    public static int coffeeVolume = 150;
+    public static int milkVolume = 20;
+    public static int maxWaterVolume = 1000;
+
     @Override
     public void fillWater() {
         System.out.println("filling water");
+        currentVolume = maxWaterVolume;
     }
 
     @Override
@@ -26,7 +32,14 @@ public class Machine1 extends BaseMachine {
         boilingWater();
         mixingComponents();
 
-        Coffee coffee = new Coffee(100);
+        if (currentVolume - coffeeVolume < 0) {
+            System.out.println("Error: no water!");
+            return null;
+        }
+
+        currentVolume -= coffeeVolume;
+
+        Coffee coffee = new Coffee(coffeeVolume);
         addMilk(coffee);
 
         return coffee;

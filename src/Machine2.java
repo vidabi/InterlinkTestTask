@@ -1,8 +1,13 @@
 
 public class Machine2 extends BaseMachine {
+    public int coffeeVolume = 200;
+    public static int maxWaterVolume = 1200;
+
     @Override
-    public void fillWater() {
+    public void fillWater()
+    {
         System.out.println("filling water");
+        currentVolume = maxWaterVolume;
     }
 
     @Override
@@ -28,7 +33,12 @@ public class Machine2 extends BaseMachine {
         millBeans();
         mixingComponents();
 
-        Coffee coffee = new Coffee(200);
+        if (currentVolume - coffeeVolume < 0) {
+            System.out.println("Error: no water!");
+            return null;
+        }
+
+        Coffee coffee = new Coffee(coffeeVolume);
 
         return coffee;
     }
